@@ -1,0 +1,2 @@
+# Medyo
+git pa nga

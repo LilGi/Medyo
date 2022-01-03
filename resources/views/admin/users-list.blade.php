@@ -34,7 +34,7 @@
                             <td class="align-middle ">{{$user_info->lname}}</td>
                             <td class="align-middle ">{{$user_info->phonenumber}}</td>
                             <td class="align-middle ">{{$user_info->email}}</td>
-                            <td class="align-middle ">{{$user_info->userdetails->region}}</td>
+                            <td class="align-middle ">{{$user_info->userdetails->regDesc}}</td>
                             <td class="align-middle ">{{$user_info->userdetails->province}}</td>
                             <td class="align-middle ">{{$user_info->userdetails->municipality}}</td>
                             <td class="align-middle ">{{$user_info->userdetails->barangay}}</td>

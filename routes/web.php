@@ -58,6 +58,11 @@ Route::middleware(['auth'])->group(function (){
     Route::get('user/account-settings', 'App\Http\Controllers\Auth\RegisteredUserController@account_settings')->name('user.account_settings');
     Route::post('user/update-account', 'App\Http\Controllers\Auth\RegisteredUserController@update_account')->name('user.update_account');
 
+//    Route::post('/getProvince', 'App\Http\Controllers\Auth\RegisteredUserController@getProvince');
+//    Route::post('/getCity', 'App\Http\Controllers\Auth\RegisteredUserController@getCity');
+//    Route::post('/getBarangay', 'App\Http\Controllers\Auth\RegisteredUserController@getBarangay');
+
+
     Route::resource('user', RegisteredUserController::class);
     Route::resource('userdetails',UserDetailsController::class);
 

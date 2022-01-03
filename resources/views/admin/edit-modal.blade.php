@@ -28,34 +28,53 @@
                             <div class="row py-2">
                                 <div class="col-md">
                                     <label>Region</label>
-                                    {{--<input type="text" class="bg-light form-control" name="region" placeholder="Province" value="{{$user_info->userdetails->region}}"/>--}}
-                                    <input type="hidden" name="region"/>
-                                    <select  id="regID">
-                                        <option value=" " selected >{{$user_info->userdetails->region}}</option>
-                                        {{--@foreach($regCode as $list)--}}
-                                            {{--<option value="{{$list->regCode}}">{{$list->regDesc}}</option>--}}
-                                        {{--@endforeach--}}
+                                    {{--<input type="text" class="bg-light form-control" name="region" placeholder="Region" value="{{$user_info->userdetails->region}}"/>--}}
+                                    <input type="hidden" name="regDesc" value="{{$user_info->userdetails->regDesc}}"/>
+                                    <select  id="regID" name="region">
+                                        @foreach($regCode as $list)
+                                            <option value="{{$list->regCode}}" {{$user_info->userdetails->region == $list->regCode  ? 'selected' : ''}}>{{ $list->regDesc}}</option>
+                                        @endforeach
                                     </select>
+                                    {{--<select name="region" required id="regID">--}}
+                                        {{--<option value="{{$user_info->userdetails->region}}" disabled selected>-Select Region-</option>--}}
+                                        {{--@foreach($regCode as $list)--}}
+                                            {{--<option value="{{$list->regCode}}" {{$user_info->userdetails->region == $list->regCode  ? 'selected' : ''}}>{{ $list->regDesc}}</option>--}}
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
                                 </div>
                             </div>
                         <div class="row py-2">
                             <div class="col-md">
                                 <label>Province</label>
-                                <input type="text" class="bg-light form-control" name="province" placeholder="Province" value="{{$user_info->userdetails->province}}"/>
+                                <input type="hidden" name="province" value="{{$user_info->userdetails->province}}"/>
+                                <select  id="provID">
+                                    <option value="" >{{$user_info->userdetails->province}}</option>
+                                </select>
+
+                                {{--<input type="text" class="bg-light form-control" name="province" placeholder="Province" value="{{$user_info->userdetails->province}}"/>--}}
                             </div>
                         </div>
-                        <div class="row py-2">
-                            <div class="col-md">
-                                <label>Municipality</label>
-                                <input type="text" class="bg-light form-control" name="city" placeholder="City/Municipality" value="{{$user_info->userdetails->municipality}}" />
+                            <div class="row py-2">
+                                <div class="col-md">
+                                    <label>Barangay</label>
+                                    {{--<input type="text" class="bg-light form-control" name="municipality" placeholder="Municipality" value="{{$user_info->userdetails->municipality}}"/>--}}
+                                    <input type="hidden" name="municipality" value="{{$user_info->userdetails->municipality}}"/>
+                                    <select  id="cityID">
+                                        <option value="" >{{$user_info->userdetails->municipality}}</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row py-2">
-                            <div class="col-md">
-                                <label>Barangay</label>
-                                <input type="text"  name="barangay" class="bg-light form-control" placeholder="Barangay" value="{{$user_info->userdetails->barangay}}" />
+                            <div class="row py-2">
+                                <div class="col-md">
+                                    <label>Municipality</label>
+                                    {{--<input type="text" class="bg-light form-control" name="barangay" placeholder="barangay" value="{{$user_info->userdetails->barangay}}"/>--}}
+                                    <input type="hidden" name="barangay" value="{{$user_info->userdetails->barangay}}"/>
+                                    <select  id="barangayID">
+                                        <option value="" >{{$user_info->userdetails->barangay}}</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+
                         <br>
                         <h4 style="font-size: revert">Contact Information</h4>
                         <div class="row py-2">
@@ -67,27 +86,27 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">+63</span>
                                 </div>
-                                <input type="tel" id="phonenumber" class="form-control" pattern="[0-9]{10}" type="tel" name="phonenumber" placeholder="9123457891" value="{{$user_info->phonenumber}}"/>
+                                <input id="phonenumber" class="form-control" pattern="[0-9]{10}" type="tel" name="phonenumber" placeholder="9123457891" value="{{$user_info->phonenumber}}"/>
                             </div>
-                        <h4 style="font-size: revert">Role</h4>
-                        <div class="row py-2">
-                            <div class="col-md">
-                                <div class="arrow">
-                                    <select name="role" id="role" class="bg-light" onchange='Roles(this.value);'>
-                                        <option value="curent" selected >Select current role</option>
-                                        <option value="student">Student</option>
-                                        <option value="teacher">Teacher</option>
-                                        <option value="visitor">Visitor</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row py-2">
-                            <div class="col-md">
-                                <!-- <label for="idnumber"><span class="clue"></span></label> -->
-                                <input type="text" name="student" id="idnumber" class="bg light form-control"  style='display:none;' placeholder="Please fill this field" >
-                            </div>
-                        </div>
+                        {{--<h4 style="font-size: revert">Role</h4>--}}
+                        {{--<div class="row py-2">--}}
+                            {{--<div class="col-md">--}}
+                                {{--<div class="arrow">--}}
+                                    {{--<select name="role" id="role" class="bg-light" onchange='Roles(this.value);'>--}}
+                                        {{--<option value="curent" selected >Select current role</option>--}}
+                                        {{--<option value="student">Student</option>--}}
+                                        {{--<option value="teacher">Teacher</option>--}}
+                                        {{--<option value="visitor">Visitor</option>--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="row py-2">--}}
+                            {{--<div class="col-md">--}}
+                                {{--<!-- <label for="idnumber"><span class="clue"></span></label> -->--}}
+                                {{--<input type="text" name="student" id="idnumber" class="bg light form-control"  style='display:none;' placeholder="Please fill this field" >--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <div class="py-3 pb-4 border-bottom">
                             <button type="submit" class="btn btn-primary">Save changes</button>
                             <button data-dismiss="modal" class="btn btn-info">Cancel</button>

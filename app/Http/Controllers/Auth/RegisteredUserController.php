@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use App\Models\UserDetails;
+use Illuminate\Support\Facades\DB;
 
 
 class RegisteredUserController extends Controller
@@ -22,11 +23,18 @@ class RegisteredUserController extends Controller
      */
     public function index()
     {
+        $region['regCode']=DB::table('regions')->get();
 
+//        $province['provCode']=DB::table('provinces')->get();
         $user = User::all();
-        return view('admin.users-list', compact('user'));
+        return view('admin.users-list', $region, compact('user'));
+
+
+//        return view('admin.users-list', $region);
 
     }
+
+
 
     public function qrcode()
     {
@@ -205,8 +213,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'lname' => ['required', 'string', 'max:120'],
-            'phonenumber' => ['required', 'digits:10', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'phonenumber' => ['required', 'digits:10' ],
+            'email' => ['required', 'string', 'email', 'max:50'],
         ]);
 
 
@@ -224,8 +232,10 @@ class RegisteredUserController extends Controller
 
         $userdetails = $user->userdetails;
 
+        $userdetails->region = $request->region;
+        $userdetails->regDesc = $request->regDesc;
         $userdetails->province = $request->province;
-        $userdetails->city = $request->city;
+        $userdetails->municipality= $request->municipality;
         $userdetails->barangay = $request->barangay;
 
         $userdetails->save();

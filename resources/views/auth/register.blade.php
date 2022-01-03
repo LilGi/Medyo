@@ -148,11 +148,11 @@
         <div class="row py-2">
             <div class="col-md">
                 {{--<input type="text" name="barangay" class="bg-light form-control" placeholder="Barangay">--}}
-                <input type="hidden" name="region"/>
-                <select  id="regID">
-                    <option value=" " >-Select Region-</option>
+                <input type="hidden" name="regDesc"/>
+                <select  id="regID" name="region" >
+                    <option value=""  >-Select Region-</option>
                     @foreach($regCode as $list)
-                        <option value="{{$list->regCode}}">{{$list->regDesc}}</option>
+                        <option value="{{$list->regCode}}" >{{$list->regDesc}}</option>
                     @endforeach
                 </select>
             </div>
@@ -265,7 +265,7 @@
         jQuery('#regID').change(function () {
 
             var selected_caption = $("#regID option:selected").text();
-            $('input[name=region]').val(selected_caption);
+            $('input[name=regDesc]').val(selected_caption);
 
             let regCode=jQuery(this).val();
 
@@ -331,74 +331,7 @@
     
 </script>
 
-{{--<script type="text/javascript">--}}
-    {{--$(document).ready(function () {--}}
 
-        {{--$(document).on('change', '.region_category', function () {--}}
-            {{--// console.log("nagsukat");--}}
-
-            {{--var regCode = $(this).val();--}}
-            {{--// console.log(regCode);--}}
-
-            {{--var div = $(this).parent();--}}
-            {{--var op = " ";--}}
-
-            {{--$.ajax({--}}
-                {{--type: 'get',--}}
-                {{--url: '{!!URL::to('findProvince')!!}',--}}
-                {{--data: {'id': regCode},--}}
-                {{--success: function (data) {--}}
-                    {{--// console.log('success');--}}
-                    {{--// console.log(data);--}}
-                    {{--// console.log(data.length);--}}
-                    {{--op += '<option value="0" selected disabled>chose product</option>';--}}
-                    {{--for (var i = 0; i < data.length; i++) {--}}
-                        {{--op += '<option value="' + data[i].id + '">' + data[i].province_category + '</option>';--}}
-                    {{--}--}}
-
-                    {{--div.find('.province_category').html(" ");--}}
-                    {{--div.find('.province_category').append(op);--}}
-                {{--},--}}
-                {{--error: function () {--}}
-
-                {{--}--}}
-            {{--});--}}
-        {{--});--}}
-
-    {{--});--}}
-{{--</script>--}}
-
-
-        {{--$(document).on('change','.productname',function () {--}}
-            {{--var prod_id=$(this).val();--}}
-
-            {{--var a=$(this).parent();--}}
-            {{--console.log(prod_id);--}}
-            {{--var op="";--}}
-            {{--$.ajax({--}}
-                {{--type:'get',--}}
-                {{--url:'{!!URL::to('findPrice')!!}',--}}
-                {{--data:{'id':prod_id},--}}
-                {{--dataType:'json',//return data will be json--}}
-                {{--success:function(data){--}}
-                    {{--console.log("price");--}}
-                    {{--console.log(data.price);--}}
-
-                    {{--// here price is coloumn name in products table data.coln name--}}
-
-                    {{--a.find('.prod_price').val(data.price);--}}
-
-                {{--},--}}
-                {{--error:function(){--}}
-
-                {{--}--}}
-            {{--});--}}
-
-
-        {{--});--}}
-
-    });
-</script>
 
 </body>
 </html>

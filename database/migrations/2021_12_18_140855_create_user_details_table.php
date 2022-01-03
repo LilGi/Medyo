@@ -17,6 +17,7 @@ class CreateUserDetailsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('region');
+            $table->string('regDesc');
             $table->string('province');
             $table->string('municipality');
             $table->string('barangay');

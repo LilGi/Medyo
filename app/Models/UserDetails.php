@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
+
 class UserDetails extends Model
 {
     use HasFactory;
@@ -13,6 +14,8 @@ class UserDetails extends Model
 
     protected $fillable = [
         'region',
+        'regDesc',
+
         'province',
         'municipality',
         'barangay',
@@ -22,5 +25,7 @@ class UserDetails extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
 
 }

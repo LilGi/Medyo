@@ -13,6 +13,7 @@ class Registration extends Controller
 
         $region['regCode']=DB::table('regions')->get();
 
+
         return view('auth.register', $region);
 //        $region=Region::all();
 

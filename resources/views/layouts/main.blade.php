@@ -29,6 +29,7 @@
     </style>
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
@@ -49,29 +50,27 @@
     </script>
 
 
-
     <title>TPortal | @yield('title')</title>
 
 </head>
+
 <body>
 
 
-
 @yield('content')
-
 
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 
 @yield('qr-script')
 
-{{-- Start Log out script--}}
+ {{--Start Log out script--}}
 <script>
     function myFunction() {
         document.getElementById("logout").submit();
     }
 </script>
-{{-- End Log out script--}}
+ {{--End Log out script--}}
 
 <script>
     jQuery(document).ready(function () {
@@ -79,7 +78,7 @@
         jQuery('#regID').change(function () {
 
             var selected_caption = $("#regID option:selected").text();
-            $('input[name=region]').val(selected_caption);
+            $('input[name=regDesc]').val(selected_caption);
 
             let regCode=jQuery(this).val();
 
@@ -134,7 +133,6 @@
 
             var selected_caption = $("#barangayID option:selected").text();
             $('input[name=barangay]').val(selected_caption);
-
 
 
         });

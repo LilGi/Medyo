@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\UserDetails;
 
 
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -51,9 +52,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserDetails::class);
     }
 
-    public function findForPassport($identifier) {
-        return $this->orWhere('email', $identifier)->orWhere('phonenumber', $identifier)->first();
-    }
+
+
+//    public function findForPassport($identifier) {
+//        return $this->orWhere('email', $identifier)->orWhere('phonenumber', $identifier)->first();
+//    }
 
 
 

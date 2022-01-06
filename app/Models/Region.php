@@ -20,5 +20,8 @@ class Region extends Model
 
     protected $table='regions';
 
-
+    public function userdetails()
+    {
+        return $this->belongsTo('App\Models\UserDetails');
+    }
 }

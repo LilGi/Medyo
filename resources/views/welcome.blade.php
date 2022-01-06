@@ -114,7 +114,7 @@
         <div class="wrapper">
             @if (session('success'))
                 <div class="alert alert-success">
-                    {{session('success')}}
+                    We have sent an email to {{session('success')}} with a link for activating your account and proving you are human.
                 </div>
             @endif
             <!-- Session Status -->

@@ -16,15 +16,15 @@
                 <table class="table table-striped table-bordered display nowrap" cellspacing="0" id="example" >
                     <thead>
                     <tr >
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Region</th>
-                        <th>Province</th>
-                        <th>City</th>
-                        <th>Barangay</th>
-                        <th>Actions</th>
+                        <th>First name:</th>
+                        <th>Last name:</th>
+                        <th>Phone:</th>
+                        <th>Email:</th>
+                        <th>Province:</th>
+                        <th>City:</th>
+                        <th>Barangay:</th>
+                        <th>Region:</th>
+                        <th>Actions:</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,10 +34,10 @@
                             <td class="align-middle ">{{$user_info->lname}}</td>
                             <td class="align-middle ">{{$user_info->phonenumber}}</td>
                             <td class="align-middle ">{{$user_info->email}}</td>
-                            <td class="align-middle ">{{$user_info->userdetails->regDesc}}</td>
                             <td class="align-middle ">{{$user_info->userdetails->province}}</td>
                             <td class="align-middle ">{{$user_info->userdetails->municipality}}</td>
                             <td class="align-middle ">{{$user_info->userdetails->barangay}}</td>
+                            <td class="align-middle ">{{$user_info->userdetails->regDesc}}</td>
                             <td class="align-middle">
                                 <a href="#" data-toggle="modal" data-target="#ModalEdit{{$user_info->id}}" class="btn btn-success" >Edit</a>
                                 <a href="#" data-toggle="modal" data-target="#ModalDelete{{$user_info->id}}" class="btn btn-danger" >Delete</a>

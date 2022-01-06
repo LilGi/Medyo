@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Region;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use App\Models\UserDetails;
 use Illuminate\Support\Facades\DB;
+use Nexmo\Laravel\Facade\Nexmo;
+use Twilio\Rest\Client;
 
 
 class RegisteredUserController extends Controller
@@ -33,7 +36,6 @@ class RegisteredUserController extends Controller
 //        return view('admin.users-list', $region);
 
     }
-
 
 
     public function qrcode()
@@ -101,9 +103,6 @@ class RegisteredUserController extends Controller
         }
     }
 
-
-
-
     public function change_password()
     {
         return view('user.change-password');
@@ -138,44 +137,93 @@ class RegisteredUserController extends Controller
         }
     }
 
-
-
     public function create()
     {
         return view('auth.register');
     }
 
-
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'lname' => ['required', 'string', 'max:120'],
-            'phonenumber' => ['required', 'digits:10', 'unique:users'],
+            'phonenumber' => ['required', 'string', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
 
-        $user = User::create([
-            'name' => $request->name,
-            'lname' => $request->lname,
-            'email' => $request->email,
-            'phonenumber' => $request->phonenumber,
-            'password' => Hash::make($request->password),
-        ]);
+        $token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_sid = getenv("TWILIO_SID");
+        $twilio_verify_sid = getenv("TWILIO_VERIFY_SID");
+        $twilio = new Client($twilio_sid, $token);
+        $twilio->verify->v2->services($twilio_verify_sid)
+            ->verifications
+            ->create($data['phonenumber'], "sms");
 
+        $user = User::create([
+            'name' => $data['name'],
+            'lname' => $data['lname'],
+            'email' => $data['email'],
+            'phonenumber' =>$data['phonenumber'],
+            'password' => Hash::make($data['password']),
+
+        ]);
 
         $userdetails = new UserDetails($request->all());
         $user->userdetails()->save($userdetails);
 
-
         event(new Registered($user));
 
-        $request->session()->flash('success', 'You are now registered. A verification link has been sent to your email account.');
+        return redirect()->route('verify')->with(['phonenumber' => $data['phonenumber']]);
 
-        return view('/welcome');
+
+//        Nexmo::message()->send([
+//            'to'=>'+63'.(int)$request->phonenumber,
+//            'from'=>'Ts Durdoy',
+//            'text'=>'Verify code:'.$code,
+//
+//        ]);
+
+//        $request->session()->flash('success', $user->email);
+//
+//        return redirect('/');
     }
+
+
+    public function postVerify(Request $request)
+    {
+        $data = $request->validate([
+            'verification_code' => ['required', 'numeric'],
+            'phonenumber' => ['required', 'string'],
+        ]);
+        /* Get credentials from .env */
+        $token = getenv("TWILIO_AUTH_TOKEN");
+        $twilio_sid = getenv("TWILIO_SID");
+        $twilio_verify_sid = getenv("TWILIO_VERIFY_SID");
+        $twilio = new Client($twilio_sid, $token);
+        $verification = $twilio->verify->v2->services($twilio_verify_sid)
+            ->verificationChecks
+            ->create($data['verification_code'], array('to' => $data['phonenumber']));
+        if ($verification->valid) {
+            $user = tap(User::where('phonenumber', $data['phonenumber']))->update(['isVerified' => true]);
+            /* Authenticate user */
+            Auth::login($user->first());
+            return redirect()->route('home')->with(['message' => 'Phone number verified']);
+        }
+        return back()->with(['phonenumber' => $data['phonenumber'], 'error' => 'Invalid verification code entered!']);
+
+//       $check=UserDetails::where('code',$request->code)->first();
+//       if($check){
+//           $check->code=Null;
+//           $check->save();
+//           return redirect('/');
+//       }else{
+//           return back()->withMessage('Verification code is not correct');
+//       }
+
+    }
+
 
     /**
      * Display the specified resource.

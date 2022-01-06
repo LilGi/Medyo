@@ -94,7 +94,12 @@ Route::get('/home', function () {
 })->middleware('verified')->name('home');
 
 
+Route::get('/verify', function () {
+    return view('auth.very');
+})->name('verify');
 
+
+Route::post('/verify', 'App\Http\Controllers\Auth\RegisteredUserController@postVerify')->name('user.verify');
 
 
 

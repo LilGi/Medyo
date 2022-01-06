@@ -15,7 +15,6 @@ class UserDetails extends Model
     protected $fillable = [
         'region',
         'regDesc',
-
         'province',
         'municipality',
         'barangay',
@@ -24,6 +23,11 @@ class UserDetails extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function regions()
+    {
+            return $this->hasMany('App\Models\Region');
     }
 
 

@@ -192,7 +192,9 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">+63</span>
             </div>
-            <input type="tel" id="phonenumber" class="form-control" pattern="[0-9]{10}" type="tel" name="phonenumber" :value="old('phonenumber')" placeholder="9123457891" autofocus/>
+            <input type="text" id="phonenumber" class="form-control" type="tel" name="phonenumber" :value="old('phonenumber')" placeholder="9123457891" autofocus/>
+
+            {{--<input type="tel" id="phonenumber" class="form-control" pattern="[0-9]{10}" type="tel" name="phonenumber" :value="old('phonenumber')" placeholder="9123457891" autofocus/>--}}
         </div>
         <!-- Type New Password section -->
         <h4 style="font-size: revert">Password</h4>
@@ -259,6 +261,8 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+
+
 <script>
     jQuery(document).ready(function () {
 
@@ -279,7 +283,7 @@
                 }
 
             });
-            
+
         });
         jQuery('#provID').change(function () {
 
@@ -326,9 +330,9 @@
         });
 
 
-        
+
     });
-    
+
 </script>
 
 

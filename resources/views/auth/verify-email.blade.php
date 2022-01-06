@@ -85,7 +85,7 @@
                         {{ __('A new verification link has been sent to the email address you provided during registration.') }}
                     </div>
                 @endif
-                <div class="d-flex align-items-center py-2 pb-4 pt-4 border-top">
+                <div class="d-flex py-2 pb-4 pt-4 border-top">
                     <button type="submit" id="submit" class="btn btn-info">Resend Verification Email</button>
                 </div>
 

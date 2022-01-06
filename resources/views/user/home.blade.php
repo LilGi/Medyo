@@ -7,6 +7,11 @@
 <main role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
+        @if (session('message'))
+            <div class="alert alert-success" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="container border-bottom">
             <h1 class="display-3">Hello, {{ Auth::user()->name }}!</h1>
             <p>We are developing a contactless entry system using the Raspberry Pi. Teachers, students, and visitors can generate QR Codes in the system after verification of email, verification phone number, acceptance, and oath regarding health that is provided by the website.
